@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 10:13:18 by gboutin           #+#    #+#             */
-/*   Updated: 2019/05/06 10:31:08 by gboutin          ###   ########.fr       */
+/*   Updated: 2019/05/07 17:09:26 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void		zoom_in(int x, int y, t_data *data)
 	X1 = (x / VARZOOM + X1) - (x / (VARZOOM * 1.1));
 	Y1 = (y / VARZOOM + Y1) - (y / (VARZOOM * 1.1));
 	VARZOOM *= 1.1;
-	if (ITERATION_MAX + 2 <= 500)
-		ITERATION_MAX += 2;
+	if (ITERATION_MAX + 1 <= 500)
+		ITERATION_MAX += 1;
 	if (data->fractal >= 1 && data->fractal <= 4)
 		(*fractal[data->fractal])(data);
 }
@@ -36,8 +36,8 @@ void		zoom_out(int x, int y, t_data *data)
 		X1 = (x / VARZOOM + X1) - (x / (VARZOOM / 1.1));
 		Y1 = (y / VARZOOM + Y1) - (y / (VARZOOM / 1.1));
 		VARZOOM /= 1.1;
-		if (ITERATION_MAX - 2 > 5)
-			ITERATION_MAX -= 2;
+		if (ITERATION_MAX - 1 > 5)
+			ITERATION_MAX -= 1;
 	}
 	if (data->fractal >= 1 && data->fractal <= 4)
 		(*fractal[data->fractal])(data);
@@ -48,8 +48,8 @@ void		ft_iteration_more(t_data *data)
 	void	(*fractal[5])(t_data *data);
 
 	init_array_fractal(&(*fractal));
-	if (ITERATION_MAX + 5 <= 500)
-		ITERATION_MAX += 5;
+	if (ITERATION_MAX + 3 <= 500)
+		ITERATION_MAX += 3;
 	if (data->fractal >= 1 && data->fractal <= 4)
 		(*fractal[data->fractal])(data);
 }
@@ -59,8 +59,8 @@ void		ft_iteration_minus(t_data *data)
 	void	(*fractal[5])(t_data *data);
 
 	init_array_fractal(&(*fractal));
-	if (ITERATION_MAX - 5 > 0)
-		ITERATION_MAX -= 5;
+	if (ITERATION_MAX - 3 >= 5)
+		ITERATION_MAX -= 3;
 	if (data->fractal >= 1 && data->fractal <= 4)
 		(*fractal[data->fractal])(data);
 }

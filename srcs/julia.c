@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 09:50:28 by gboutin           #+#    #+#             */
-/*   Updated: 2019/05/07 11:34:08 by gboutin          ###   ########.fr       */
+/*   Updated: 2019/05/08 09:16:19 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void			init_variable_julia(t_data *data)
 {
-	data->fractal = 2;
+	data->stop = 1;
 	ITERATION_MAX = 50;
-	X1 = -1;
-	Y1 = -1.2;
+	X1 = -2;
+	Y1 = -2;
 	VARZOOM = 200;
-	CR = 0.285;
-	CI = 0.01;
+	CR = 0.0;
+	CI = 110.0;
 }
 
 static void		julia_calc(t_data *data)
@@ -37,7 +37,7 @@ static void		julia_calc(t_data *data)
 	if (ITERATION == ITERATION_MAX)
 		ft_put_pixel(data, BLUE_DARK);
 	else
-		ft_put_pixel(data, COLOR[ITERATION % 28]);
+		ft_put_pixel(data, COLOR[S_COLOR][ITERATION % 7]);
 }
 
 static void		*ft_julia(void *tab)

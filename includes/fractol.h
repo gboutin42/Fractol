@@ -6,24 +6,25 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 11:10:33 by gboutin           #+#    #+#             */
-/*   Updated: 2019/05/07 13:57:19 by gboutin          ###   ########.fr       */
+/*   Updated: 2019/05/08 16:15:49 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include "../libft/srcs/libft.h"
+# include "../libft/includes/libft.h"
 # include <mlx.h>
 # include <math.h>
 # include <pthread.h>
+# include <stdio.h>
 
 /*
 ** -------------------------SIZE------------------------------
 */
-# define WIDTH			1000
+# define WIDTH			800
 # define THREAD_WIDTH	5
-# define THREAD_NUMBER	200
+# define THREAD_NUMBER	160
 
 /*
 ** -----------------------POINTER MLX-------------------------
@@ -52,6 +53,7 @@
 ** -------------------------COLOR-----------------------------
 */
 # define COLOR			data->color
+# define S_COLOR		data->select_color
 # define CYAN			0x26e7f6
 # define BLACK			0x000000
 # define WHITE			0xffffff
@@ -70,8 +72,8 @@
 # define ORANGE			0xffa500
 # define PINK_PAST		0xffd7d7
 # define SAUMON_2		0xffe9d6
-# define YELLOW_PAST	0xfffbd0
-# define GREEN_PAST		0xe3ffd9
+# define YELLOW_PAST	0xffffba
+# define GREEN_PAST		0xbaffc9
 # define BLUE_PAST		0xd0fff8
 # define RED_DARK		0x5a0000
 # define ORANGE_DARK	0x7d5d14
@@ -123,51 +125,42 @@ typedef struct		s_data
 	int				endian;
 	int				stop;
 	int				fractal;
-	int				color[28];
+	int				select_color;
+	int				color[4][7];
 	long double		tmp;
 	t_variable		var;
 	t_env			mlx;
 }					t_data;
 
 /*
-** --------------------------HOOK-----------------------------
+** -------------------HOOK & MOUSE CONTROL--------------------
 */
 int					deal_mouse(t_data *data);
 int					deal_key(int key, t_data *data);
 int					zoom_mouse(int mousecode, int x, int y, t_data *data);
 int					mouse(int x, int y, t_data *data);
 void				ft_close(t_data *data);
+void				moving_up(t_data *data);
+void				moving_down(t_data *data);
+void				moving_left(t_data *data);
+void				moving_right(t_data *data);
+void				ft_stop_fractale(t_data *data);
+void				zoom_in(int x, int y, t_data *data);
+void				zoom_out(int x, int y, t_data *data);
+void				ft_iteration_more(t_data *data);
+void				ft_iteration_minus(t_data *data);
 
 /*
 ** --------------------INIT COMANDS AND MLX-------------------
 */
 void				smlx_init(t_data *data);
+void				init_fractale(t_data *data, char *title);
 void				init_array_fractal(void (*fractal[])(t_data *data));
 void				init_variable_mandelbrot(t_data *data);
 void				init_variable_julia(t_data *data);
+void				init_variable_julia_2(t_data *data);
 void				init_variable_burningship(t_data *data);
 void				select_fractal(t_data *data);
-
-/*
-** --------------------------MOVING---------------------------
-*/
-void				translate_up(t_data *data);
-void				translate_down(t_data *data);
-void				translate_left(t_data *data);
-void				translate_right(t_data *data);
-void				ft_stop_fractale(t_data *data);
-
-/*
-** ----------------------------ZOOM---------------------------
-*/
-void				zoom_in(int x, int y, t_data *data);
-void				zoom_out(int x, int y, t_data *data);
-
-/*
-** -------------------------ITERATION-------------------------
-*/
-void				ft_iteration_more(t_data *data);
-void				ft_iteration_minus(t_data *data);
 
 /*
 ** --------------------------DISPLAY--------------------------
@@ -175,12 +168,15 @@ void				ft_iteration_minus(t_data *data);
 void				ft_put_pixel(t_data *data, int color);
 void				ft_color(t_data *data);
 void				ft_menu(t_data *data);
+void				ft_change_color(t_data *data);
 
 /*
 ** -------------------------FRACTALS--------------------------
 */
+void				ft_choose_fractale(t_data *data);
 void				ft_mandelbrot_pthread(t_data *data);
-void				ft_julia_pthread(t_data *data);
 void				ft_burningship_pthread(t_data *data);
+void				ft_julia_pthread(t_data *data);
+void				ft_julia_pthread_2(t_data *data);
 
 #endif

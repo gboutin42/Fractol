@@ -6,7 +6,7 @@
 #    By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 10:43:19 by gboutin           #+#    #+#              #
-#    Updated: 2019/05/07 14:26:17 by gboutin          ###   ########.fr        #
+#    Updated: 2019/05/08 16:15:30 by gboutin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ CC			= gcc
 NAME		= fractol
 CFLAGS		= -Wall -Wextra -Werror
 MLX			= -framework OpenGL -framework AppKit -lmlx -L /usr/local/lib/
-FSAN		= -g -fsanitize=address -fno-omit-frame-pointer
 LIBFT		= cd libft && make
 LIBFTFILES	= libft/libft.a
 OBJDIR		= ./obj/
@@ -30,6 +29,7 @@ SRCS		=	burningship.c \
 				hook.c \
 				init.c \
 				julia.c \
+				julia_2.c \
 				main.c \
 				mandelbrot.c \
 				mouse.c \
@@ -54,7 +54,7 @@ $(NAME): $(OBJFILES)
 	echo "$(CYAN)Executable:\t\t$(GREEN)[Done]$(NO_COLOR)"
 
 clean:
-	$(RM) $(OBJFILES)
+	$(RM) -rf $(OBJDIR)
 	cd libft && make fclean
 
 fclean: clean

@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 09:49:55 by gboutin           #+#    #+#             */
-/*   Updated: 2019/05/07 11:36:53 by gboutin          ###   ########.fr       */
+/*   Updated: 2019/05/08 08:45:12 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 void			init_variable_mandelbrot(t_data *data)
 {
-	data->fractal = 1;
 	ITERATION_MAX = 50;
-	X1 = -2.05;
-	Y1 = -1.3;
-	VARZOOM = 250;
+	X1 = -2;
+	Y1 = -2;
+	VARZOOM = 200;
 }
 
-void			mandelbrot_calc(t_data *data)
+static void		mandelbrot_calc(t_data *data)
 {
 	CR = X / VARZOOM + X1;
 	CI = Y / VARZOOM + Y1;
@@ -37,7 +36,7 @@ void			mandelbrot_calc(t_data *data)
 	if (ITERATION == ITERATION_MAX)
 		ft_put_pixel(data, BLUE_DARK);
 	else
-		ft_put_pixel(data, COLOR[ITERATION % 28]);
+		ft_put_pixel(data, COLOR[S_COLOR][ITERATION % 7]);
 }
 
 static void		*ft_mandelbrot(void *tab)
