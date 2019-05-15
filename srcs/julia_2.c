@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 09:15:26 by gboutin           #+#    #+#             */
-/*   Updated: 2019/05/08 16:19:08 by gboutin          ###   ########.fr       */
+/*   Updated: 2019/05/10 11:28:18 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 void			init_variable_julia_2(t_data *data)
 {
-	data->stop = 1;
-	ITERATION_MAX = 50;
-	X1 = -2;
-	Y1 = -2;
-	VARZOOM = 200;
+	init_reset_variable(data);
 	CR = 130.0;
 	CI = 504.0;
 }

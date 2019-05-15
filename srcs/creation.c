@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia_3.c                                          :+:      :+:    :+:   */
+/*   creation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 16:03:03 by gboutin           #+#    #+#             */
-/*   Updated: 2019/05/08 16:11:33 by gboutin          ###   ########.fr       */
+/*   Updated: 2019/05/10 11:22:47 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-void			init_variable_julia_3(t_data *data)
+static void		creation_calc(t_data *data)
 {
-	data->stop = 1;
-	ITERATION_MAX = 50;
-	X1 = -2;
-	Y1 = -2;
-	VARZOOM = 200;
-	CR = 0.0;
-	CI = 110.0;
-}
-
-static void		julia_calc_3(t_data *data)
-{
-	ZR = X / VARZOOM + X1;
-	ZI = Y / VARZOOM + Y1;
+	CR = X / VARZOOM + X1;
+	CI = Y / VARZOOM + Y1;
+	ZR = 0;
+	ZI = 0;
 	ITERATION = -1;
 	while (++ITERATION < ITERATION_MAX && (ZR * ZR + ZI * ZI) < 4)
 	{
-		data->tmp = ZR;
-		ZR = ZR * ZR - ZI * ZI + 1.8 + (CR / WIDTH);
-		ZI = (2 * ZI * data->tmp) + CI / WIDTH;
+		data->tmp = ZR * ZR * ZR - 3 * ZR * ZI * ZI + CR;
+		ZI = 3 * ZI * ZR * ZR - ZI * ZI * ZI + CI;
+		ZR = data->tmp;
 	}
 	if (ITERATION == ITERATION_MAX)
 		ft_put_pixel(data, BLUE_DARK);
@@ -40,24 +31,24 @@ static void		julia_calc_3(t_data *data)
 		ft_put_pixel(data, COLOR[S_COLOR][ITERATION % 7]);
 }
 
-static void		*ft_julia_3(void *tab)
+static void		*ft_creation(void *tab)
 {
 	int			i;
 	t_data		*data;
 
-	data = (t_data *)tab;
+	data = (t_data*)tab;
 	X = -1;
 	i = Y;
 	while (++X < WIDTH)
 	{
 		Y = i;
 		while (Y++ < data->var.y_max)
-			julia_calc_3(data);
+			creation_calc(data);
 	}
 	return (tab);
 }
 
-void			ft_julia_pthread_3(t_data *data)
+void			ft_creation_pthread(t_data *data)
 {
 	t_data		tab[THREAD_NUMBER];
 	pthread_t	t_phread[THREAD_NUMBER];
@@ -69,7 +60,7 @@ void			ft_julia_pthread_3(t_data *data)
 		ft_memcpy((void*)&tab[i], (void*)data, sizeof(t_data));
 		tab[i].var.y = THREAD_WIDTH * i;
 		tab[i].var.y_max = THREAD_WIDTH * (i + 1);
-		pthread_create(&t_phread[i], NULL, ft_julia_3, &tab[i]);
+		pthread_create(&t_phread[i], NULL, ft_creation, &tab[i]);
 	}
 	while (i--)
 		pthread_join(t_phread[i], NULL);

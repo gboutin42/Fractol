@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 12:07:45 by gboutin           #+#    #+#             */
-/*   Updated: 2019/05/08 16:16:05 by gboutin          ###   ########.fr       */
+/*   Updated: 2019/05/09 14:01:27 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			deal_mouse(t_data *data)
 
 int			zoom_mouse(int mousecode, int x, int y, t_data *data)
 {
-	void	(*fractal[5])(t_data *data);
+	void	(*fractal[FRACTAL_NUMBER])(t_data *data);
 
 	init_array_fractal(&(*fractal));
 	if (x < 0 || x >= WIDTH || y < 0 || y >= WIDTH)
@@ -32,21 +32,21 @@ int			zoom_mouse(int mousecode, int x, int y, t_data *data)
 		zoom_in(x, y, data);
 	if (mousecode == 5)
 		zoom_out(x, y, data);
-	if (data->fractal >= 1 && data->fractal <= 4)
+	if (data->fractal >= FRACTAL_NB_MIN && data->fractal <= FRACTAL_NB_MAX)
 		(*fractal[data->fractal])(data);
 	return (0);
 }
 
 int			mouse(int x, int y, t_data *data)
 {
-	void	(*fractal[5])(t_data *data);
+	void	(*fractal[FRACTAL_NUMBER])(t_data *data);
 
 	init_array_fractal(&(*fractal));
 	if (x < 0 || x >= WIDTH || y < 0 || y >= WIDTH || data->stop == 1)
 		return (0);
 	CR = x * 2;
 	CI = y * 2 - 800;
-	if (data->fractal >= 1 && data->fractal <= 4)
+	if (data->fractal >= FRACTAL_NB_MIN && data->fractal <= FRACTAL_NB_MAX)
 		(*fractal[data->fractal])(data);
 	return (0);
 }

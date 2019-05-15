@@ -6,7 +6,7 @@
 #    By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 10:43:19 by gboutin           #+#    #+#              #
-#    Updated: 2019/05/08 16:15:30 by gboutin          ###   ########.fr        #
+#    Updated: 2019/05/09 13:56:23 by gboutin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,10 +30,14 @@ SRCS		=	burningship.c \
 				init.c \
 				julia.c \
 				julia_2.c \
+				creation.c \
+				creation_2.c \
 				main.c \
 				mandelbrot.c \
+				inverse_mandelbrot.c \
 				mouse.c \
 				moving.c \
+				tricorn.c \
 				zoom.c
 
 SRCFILES = $(addprefix $(SRCDIR), $(SRCS))

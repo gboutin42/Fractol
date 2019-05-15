@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 11:10:33 by gboutin           #+#    #+#             */
-/*   Updated: 2019/05/08 16:15:49 by gboutin          ###   ########.fr       */
+/*   Updated: 2019/05/15 10:17:33 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <mlx.h>
 # include <math.h>
 # include <pthread.h>
-# include <stdio.h>
 
 /*
 ** -------------------------SIZE------------------------------
@@ -25,6 +24,9 @@
 # define WIDTH			800
 # define THREAD_WIDTH	5
 # define THREAD_NUMBER	160
+# define FRACTAL_NUMBER	9
+# define FRACTAL_NB_MIN	1
+# define FRACTAL_NB_MAX	8
 
 /*
 ** -----------------------POINTER MLX-------------------------
@@ -156,10 +158,9 @@ void				ft_iteration_minus(t_data *data);
 void				smlx_init(t_data *data);
 void				init_fractale(t_data *data, char *title);
 void				init_array_fractal(void (*fractal[])(t_data *data));
-void				init_variable_mandelbrot(t_data *data);
+void				init_reset_variable(t_data *data);
 void				init_variable_julia(t_data *data);
 void				init_variable_julia_2(t_data *data);
-void				init_variable_burningship(t_data *data);
 void				select_fractal(t_data *data);
 
 /*
@@ -175,8 +176,12 @@ void				ft_change_color(t_data *data);
 */
 void				ft_choose_fractale(t_data *data);
 void				ft_mandelbrot_pthread(t_data *data);
+void				ft_inverse_mandelbrot_pthread(t_data *data);
+void				ft_tricorn_pthread(t_data *data);
 void				ft_burningship_pthread(t_data *data);
 void				ft_julia_pthread(t_data *data);
 void				ft_julia_pthread_2(t_data *data);
+void				ft_creation_pthread(t_data *data);
+void				ft_creation_pthread_2(t_data *data);
 
 #endif

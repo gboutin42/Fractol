@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   tricorn.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/24 09:49:55 by gboutin           #+#    #+#             */
-/*   Updated: 2019/05/10 11:23:48 by gboutin          ###   ########.fr       */
+/*   Created: 2019/05/09 11:14:05 by gboutin           #+#    #+#             */
+/*   Updated: 2019/05/10 11:24:22 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-static void		mandelbrot_calc(t_data *data)
+static void		tricorn_calc(t_data *data)
 {
 	CR = X / VARZOOM + X1;
 	CI = Y / VARZOOM + Y1;
@@ -23,7 +23,7 @@ static void		mandelbrot_calc(t_data *data)
 	{
 		data->tmp = ZR;
 		ZR = ZR * ZR - ZI * ZI + CR;
-		ZI = (2 * data->tmp * ZI) + CI;
+		ZI = (-2 * data->tmp * ZI) + CI;
 	}
 	if (ITERATION == ITERATION_MAX)
 		ft_put_pixel(data, BLUE_DARK);
@@ -31,7 +31,7 @@ static void		mandelbrot_calc(t_data *data)
 		ft_put_pixel(data, COLOR[S_COLOR][ITERATION % 7]);
 }
 
-static void		*ft_mandelbrot(void *tab)
+static void		*ft_tricorn(void *tab)
 {
 	int			i;
 	t_data		*data;
@@ -43,12 +43,12 @@ static void		*ft_mandelbrot(void *tab)
 	{
 		Y = i;
 		while (Y++ < data->var.y_max)
-			mandelbrot_calc(data);
+			tricorn_calc(data);
 	}
 	return (tab);
 }
 
-void			ft_mandelbrot_pthread(t_data *data)
+void			ft_tricorn_pthread(t_data *data)
 {
 	t_data		tab[THREAD_NUMBER];
 	pthread_t	t_phread[THREAD_NUMBER];
@@ -60,7 +60,7 @@ void			ft_mandelbrot_pthread(t_data *data)
 		ft_memcpy((void*)&tab[i], (void*)data, sizeof(t_data));
 		tab[i].var.y = THREAD_WIDTH * i;
 		tab[i].var.y_max = THREAD_WIDTH * (i + 1);
-		pthread_create(&t_phread[i], NULL, ft_mandelbrot, &tab[i]);
+		pthread_create(&t_phread[i], NULL, ft_tricorn, &tab[i]);
 	}
 	while (i--)
 		pthread_join(t_phread[i], NULL);

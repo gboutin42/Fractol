@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 10:47:13 by gboutin           #+#    #+#             */
-/*   Updated: 2019/05/08 08:35:28 by gboutin          ###   ########.fr       */
+/*   Updated: 2019/05/10 11:36:25 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ void			ft_menu(t_data *data)
 	mlx_string_put(MLXPTR, WINPTR, 615, 17, WHITE, "Change Color:    C");
 	mlx_string_put(MLXPTR, WINPTR, 615, 32, WHITE, "Moving:    ^ V < >");
 	mlx_string_put(MLXPTR, WINPTR, 10, 775, WHITE, "Close: ESC");
-	mlx_string_put(MLXPTR, WINPTR, 450, 775, WHITE, "CI: ");
-	mlx_string_put(MLXPTR, WINPTR, 490, 775, WHITE, ci);
-	mlx_string_put(MLXPTR, WINPTR, 550, 775, WHITE, "CR: ");
-	mlx_string_put(MLXPTR, WINPTR, 590, 775, WHITE, cr);
+	mlx_string_put(MLXPTR, WINPTR, 250, 775, WHITE, "CI: ");
+	mlx_string_put(MLXPTR, WINPTR, 290, 775, WHITE, ci);
+	mlx_string_put(MLXPTR, WINPTR, 450, 775, WHITE, "CR: ");
+	mlx_string_put(MLXPTR, WINPTR, 490, 775, WHITE, cr);
 	mlx_string_put(MLXPTR, WINPTR, 650, 775, WHITE, "Iteration: ");
 	mlx_string_put(MLXPTR, WINPTR, 760, 775, WHITE, iteration);
 	free(iteration);

@@ -6,7 +6,7 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/23 08:48:37 by gboutin           #+#    #+#             */
-/*   Updated: 2019/05/08 16:15:19 by gboutin          ###   ########.fr       */
+/*   Updated: 2019/05/10 12:03:43 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,36 +44,39 @@ void		ft_close(t_data *data)
 
 void		ft_change_color(t_data *data)
 {
-	void	(*fractal[5])(t_data *data);
+	void	(*fractal[FRACTAL_NUMBER])(t_data *data);
 
 	init_array_fractal(&(*fractal));
 	if (S_COLOR < 3)
 		S_COLOR++;
 	else
 		S_COLOR = 0;
-	if (data->fractal >= 1 && data->fractal <= 4)
+	if (data->fractal >= FRACTAL_NB_MIN && data->fractal <= FRACTAL_NB_MAX)
 		(*fractal[data->fractal])(data);
 }
 
 void		ft_choose_fractale(t_data *data)
 {
-	void	(*fractal[5])(t_data *data);
+	void	(*fractal[FRACTAL_NUMBER])(t_data *data);
 
 	init_array_fractal(&(*fractal));
-	if (data->fractal < 4)
-		data->fractal++;
-	else
-		data->fractal = 1;
-	if (data->fractal == 3)
+	init_reset_variable(data);
+	((data->fractal < 8) ? data->fractal++ : (data->fractal = 1));
+	if (data->fractal == 7)
 	{
 		CR = 0.0;
 		CI = 110.0;
 	}
-	else if (data->fractal == 4)
+	else if (data->fractal == 8)
 	{
 		CR = 130.0;
 		CI = 504.0;
 	}
-	if (data->fractal >= 1 && data->fractal <= 4)
+	else
+	{
+		CR = 0;
+		CI = 0;
+	}
+	if (data->fractal >= FRACTAL_NB_MIN && data->fractal <= FRACTAL_NB_MAX)
 		(*fractal[data->fractal])(data);
 }

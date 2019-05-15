@@ -6,19 +6,11 @@
 /*   By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 10:40:08 by gboutin           #+#    #+#             */
-/*   Updated: 2019/05/08 08:45:16 by gboutin          ###   ########.fr       */
+/*   Updated: 2019/05/10 11:24:00 by gboutin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
-
-void			init_variable_burningship(t_data *data)
-{
-	ITERATION_MAX = 50;
-	X1 = -2;
-	Y1 = -2;
-	VARZOOM = 200;
-}
 
 static void		burningship_calc(t_data *data)
 {
