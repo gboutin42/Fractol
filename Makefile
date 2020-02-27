@@ -6,7 +6,7 @@
 #    By: gboutin <gboutin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/23 10:43:19 by gboutin           #+#    #+#              #
-#    Updated: 2019/05/09 13:56:23 by gboutin          ###   ########.fr        #
+#    Updated: 2020/02/27 14:52:06 by gboutin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ LIBFTFILES	= libft/libft.a
 OBJDIR		= ./obj/
 SRCDIR		= ./srcs/
 HDRDIR		= ./includes/
+STR			= $<
 RED			= \033[1;31m
 CYAN		= \033[1;36m
 GREEN		= \033[1;32m
@@ -50,12 +51,12 @@ all: $(NAME)
 $(OBJDIR)%.o: $(SRCDIR)%.c $(HDRDIR)$(NAME).h Makefile
 	mkdir -p obj/
 	$(CC) $(CFLAGS) -o $@ -c $< -I $(HDRDIR)
-	echo "$(CYAN)Compiling:\t\t$(GREEN)$<$(NO_COLOR)"
+	printf "$(CYAN)Compiling:$(GREEN)%28s  $(RED)DONE$(NO_COLOR)\r" $(STR)
 
 $(NAME): $(OBJFILES)
 	$(LIBFT)
 	$(CC) -o $@ $(CFLAGS) $(MLX) $^ $(LIBFTFILES)
-	echo "$(CYAN)Executable:\t\t$(GREEN)[Done]$(NO_COLOR)"
+	printf "$(CYAN)Executable:\t\t\t\t$(GREEN)[Done]$(NO_COLOR)\n"
 
 clean:
 	$(RM) -rf $(OBJDIR)
@@ -63,7 +64,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
-	echo "$(RED)Deleted:\t\t$(NAME)$(NO_COLOR)"
+	printf "$(RED)Deleted:\t\t\t\t$(NAME)$(NO_COLOR)\n"
 
 re: fclean all
 
